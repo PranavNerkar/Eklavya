@@ -200,12 +200,12 @@ public class Student {
 		this.password = password;
 	}
 
-	public LogIn getLogin_id() {
-		return login;
+	public LogIn getLogin() {
+	    return login;
 	}
 
-	public void setLogin_id(LogIn login) {
-		this.login = login;
+	public void setLogin(LogIn login) {
+	    this.login = login;
 	}
 	
 	

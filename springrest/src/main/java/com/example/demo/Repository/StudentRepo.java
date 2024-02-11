@@ -13,7 +13,5 @@ import jakarta.transaction.Transactional;
 @Repository
 @Transactional
 public interface StudentRepo extends JpaRepository<Student, Integer> {
-//	@Modifying
-//	@Query("update Patient set contact = ?2 where pid =?1")
-//	public int updateContact(int pid,String contact);
+	Student findByEmail(String email);
 }

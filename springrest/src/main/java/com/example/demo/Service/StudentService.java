@@ -8,13 +8,24 @@ import com.example.demo.Repository.StudentRepo;
 
 @Service
 public class StudentService {
-	
-	@Autowired
-	StudentRepo sr ;
-	
-	public int save(Student s)
-	{
-		Student st = sr.save(s);
-		return st.getStu_id();
-	}
+
+    @Autowired
+    private StudentRepo studentRepository;
+
+    public Student findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
+    public Student registerStudent(Student student) {
+        // Additional validation logic can be added here
+        return studentRepository.save(student);
+    }
+
+    public Student authenticateStudent(String email, String password) {
+        Student student = findByEmail(email);
+        if (student != null && student.getPassword().equals(password)) {
+            return student;
+        }
+        return null;
+    }
 }

@@ -45,7 +45,7 @@ public class Tutor {
 	int age;
 	
 	@Column
-	String passward;
+	String password;
 	
 	@OneToOne
 	@JoinColumn(name="login_id")
@@ -69,7 +69,7 @@ public class Tutor {
 		this.city = city;
 		this.experience = experience;
 		this.age = age;
-		this.passward = passward;
+		this.password = password;
 		this.login = login;
 	}
 
@@ -153,12 +153,12 @@ public class Tutor {
 		this.age = age;
 	}
 
-	public String getPassward() {
-		return passward;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassward(String passward) {
-		this.passward = passward;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public LogIn getLogin() {

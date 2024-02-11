@@ -8,15 +8,11 @@ import com.example.demo.Repository.LoginRepo;
 
 @Service
 public class LoginService {
-	@Autowired
-	LoginRepo lr;
-	
-	public LogIn getLoginConformation(String user_id , String password)
-	{
-		LogIn l = lr.getLogin(user_id, password) ;
-		if(l != null) {
-			return l ;
-		}
-		return null ;
-	}
+    
+    @Autowired
+    private LoginRepo loginRepo;
+    
+    public LogIn authenticate(String userId, String password) {
+        return loginRepo.getLogin(userId, password);
+    }
 }

@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.TutorRepo"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.StudentRepo"/>
+    <fullyQualifiedTypeName name="com.example.demo.Service.StudentService"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entities.Student"/>
+    <fullyQualifiedTypeName name="com.example.demo.Service.TutorService"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entities.Tutor"/>
+</qualifiedTypeNameHistroy>
