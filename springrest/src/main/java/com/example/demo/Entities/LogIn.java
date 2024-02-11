@@ -23,17 +23,20 @@ public class LogIn {
 	@Column
 	String password;
 	
-	@Column
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	Role role ;
+	
+	@Column
+	String user_name;
 
-	public LogIn(int login_id, String user_id, String password, Role role) {
+	public LogIn(int login_id, String user_id, String password, Role role ,String user_name ) {
 		super();
 		this.login_id = login_id;
 		this.user_id = user_id;
 		this.password = password;
 		this.role = role;
+		this.user_name = user_name;
 	}
 		
 	public LogIn() {
@@ -71,6 +74,14 @@ public class LogIn {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	
 }

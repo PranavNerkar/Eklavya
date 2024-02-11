@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 const MyNavbar = ({onLoginClick,onRegisterClick}) => {
   let navigator = useNavigate() ;
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav style={{ }} className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         {/* Product Name on the Left */}
         <a className="navbar-brand text-primary" href="/">
@@ -48,6 +48,11 @@ const MyNavbar = ({onLoginClick,onRegisterClick}) => {
             <li className="nav-item">
               <a className="nav-link" href="#contact">
                 Contact
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="">
+                Become a Teacher
               </a>
             </li>
           </ul>
