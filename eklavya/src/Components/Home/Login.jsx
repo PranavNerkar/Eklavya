@@ -87,7 +87,7 @@ const Login = () => {
               }}
             />
           </div>
-
+          
           <div className="mb-2">
             <label htmlFor="password">Password</label>
             <input
@@ -106,7 +106,6 @@ const Login = () => {
               }}
             />
           </div>
-
           <div className="mb-2">
             <input
               type="checkbox"
@@ -119,7 +118,6 @@ const Login = () => {
 
             <a href=""></a>
           </div>
-
           <div
             style={{ display: flag ? "block" : "none", color: "red" }}
             className="mb-2"
@@ -150,8 +148,7 @@ const Login = () => {
           </div>
 
           <div className="mt-2">
-            <label htmlFor="">Forget : </label>
-            <a href=""> Password? </a>
+            <a href="">Forget Password?</a>
           </div>
           <div className="">
             <label htmlFor="">New User : </label>

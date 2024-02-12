@@ -5,6 +5,7 @@ import Feedback from "./Feedback";
 import Footer from "./Footer";
 import Login from "./Login";
 import Register from "./Register";
+import StudentRegistrationForm from "./RegisterStudent";
 
 const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -36,7 +37,7 @@ const Home = () => {
         onRegisterClick={handleRegisterClick}
       />
       {showLogin && <Login />}
-      {showRegistration && <Register />}
+      {showRegistration && <StudentRegistrationForm />}
 
       {<Info />}
       {<Feedback />}

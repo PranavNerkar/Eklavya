@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entities.LogIn;
+import com.example.demo.Entities.Role;
 import com.example.demo.Service.LoginService;
 
 @RestController
