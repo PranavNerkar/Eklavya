@@ -30,9 +30,9 @@ public class LogIn {
 	@Column
 	String user_name;
 
-	public LogIn(int login_id, String user_id, String password, Role role ,String user_name ) {
+
+	public LogIn(String user_id, String password, Role role ,String user_name ) {
 		super();
-		this.login_id = login_id;
 		this.user_id = user_id;
 		this.password = password;
 		this.role = role;
