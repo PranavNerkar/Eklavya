@@ -37,7 +37,7 @@ public class Tutor {
 	String gender;
 	
 	@Column
-	String passward;
+	String password;
 	
 	@Column
 	String aadhar_no;
@@ -46,7 +46,7 @@ public class Tutor {
 	String country;
 	
 	@Column
-	String State ;
+	String state ;
 	
 	@Column
 	String city;
@@ -57,6 +57,9 @@ public class Tutor {
 	@Column
 	String about_you;
 
+	@Column
+	int active;
+	
 	@ManyToOne
 	@JoinColumn(name="sque_id")
 	SecurityQuestion sq ;
@@ -75,8 +78,8 @@ public class Tutor {
 	}
 
 	public Tutor(int tut_id, String first_name, String last_name, String email, String contact_no, int age,
-			String gender, String passward, String aadhar_no, String country, String state, String city, int experience,
-			String about_you, SecurityQuestion sq, String answer, LogIn login) {
+			String gender, String password, String aadhar_no, String country, String state, String city, int experience,
+			String about_you, int active, SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.tut_id = tut_id;
 		this.first_name = first_name;
@@ -85,20 +88,21 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.passward = passward;
+		this.password = password;
 		this.aadhar_no = aadhar_no;
 		this.country = country;
-		State = state;
+		this.state = state;
 		this.city = city;
 		this.experience = experience;
 		this.about_you = about_you;
+		this.active = active;
 		this.sq = sq;
 		this.answer = answer;
 		this.login = login;
 	}
 
 	public Tutor(String first_name, String last_name, String email, String contact_no, int age, String gender,
-			String passward, SecurityQuestion sq, String answer,LogIn login) {
+			String password, SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -106,10 +110,10 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.passward = passward;
+		this.password = password;
 		this.sq = sq;
-		this.login = login ;
 		this.answer = answer;
+		this.login = login;
 	}
 
 	public int getTut_id() {
@@ -144,14 +148,6 @@ public class Tutor {
 		this.email = email;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getContact_no() {
 		return contact_no;
 	}
@@ -160,20 +156,12 @@ public class Tutor {
 		this.contact_no = contact_no;
 	}
 
-	public String getState() {
-		return State;
+	public int getAge() {
+		return age;
 	}
 
-	public void setState(String state) {
-		State = state;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getGender() {
@@ -183,6 +171,14 @@ public class Tutor {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	public String getPassward() {
+		return password;
+	}
+
+	public void setPassward(String password) {
+		this.password = password;
+	}
 
 	public String getAadhar_no() {
 		return aadhar_no;
@@ -190,6 +186,30 @@ public class Tutor {
 
 	public void setAadhar_no(String aadhar_no) {
 		this.aadhar_no = aadhar_no;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public int getExperience() {
@@ -208,6 +228,14 @@ public class Tutor {
 		this.about_you = about_you;
 	}
 
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
 	public SecurityQuestion getSq() {
 		return sq;
 	}
@@ -224,28 +252,21 @@ public class Tutor {
 		this.answer = answer;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getPassward() {
-		return passward;
-	}
-
-	public void setPassward(String passward) {
-		this.passward = passward;
-	}
-
 	public LogIn getLogin() {
 		return login;
 	}
-
+	
 	public void setLogin(LogIn login) {
 		this.login = login;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Tutor [tut_id=" + tut_id + ", first_name=" + first_name + ", last_name=" + last_name + ", email="
+				+ email + ", contact_no=" + contact_no + ", age=" + age + ", gender=" + gender + ", passward="
+				+ password + ", aadhar_no=" + aadhar_no + ", country=" + country + ", state=" + state + ", city=" + city
+				+ ", experience=" + experience + ", about_you=" + about_you + ", active=" + active + ", sq=" + sq
+				+ ", answer=" + answer + ", login=" + login + "]";
+	}
 	
 }
