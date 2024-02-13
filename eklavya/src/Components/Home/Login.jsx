@@ -25,7 +25,7 @@ const Login = () => {
 
   const setMessage = () => {
     if (msg == -1) {
-      return "Check Details";
+      return "Check Credentials Correctly";
     } else {
       return "";
     }
@@ -34,7 +34,7 @@ const Login = () => {
   const submitData = (e) => {
     e.preventDefault();
     setFlag(true);
-    
+
     const reqOption = {
       method: "post",
       headers: { "content-type": "application/json" },
@@ -47,18 +47,19 @@ const Login = () => {
     fetch("http://localhost:8080/login", reqOption)
       .then((resp) => resp.json())
       .then((data) => {
-        var v = data.user_name ;
-        if(data.role.role_id == 1) {
-          navigate("/Student"+v);
-        }
-        else if(data.role.role_id == 2) {
-          navigate("/Tutor"+v);
-        }
-        else if(data.role.role_id == 3){
-          navigate("/Admin"+v);
-        }else{
-          setFlag(true) ;
-          msg = -1;
+        if (data.login_id == -1) {
+          console.log(data.login_id);
+          setFlag(true);
+          setMsg(-1);
+        } else {
+          var v = data.user_name;
+          if (data.role.role_id == 1) {
+            navigate("/Student_" + v);
+          } else if (data.role.role_id == 2) {
+            navigate("/Tutor_" + v);
+          } else if (data.role.role_id == 3) {
+            navigate("/Admin_" + v);
+          }
         }
       });
   };
@@ -87,7 +88,7 @@ const Login = () => {
               }}
             />
           </div>
-          
+
           <div className="mb-2">
             <label htmlFor="password">Password</label>
             <input
