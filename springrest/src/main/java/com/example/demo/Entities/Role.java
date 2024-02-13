@@ -33,6 +33,14 @@ public class Role {
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
-	
-	
+
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Role(int role_id) {
+		super();
+		this.role_id = role_id;
+	}
 }

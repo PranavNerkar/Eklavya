@@ -50,6 +50,11 @@ const MyNavbar = ({onLoginClick,onRegisterClick}) => {
                 Contact
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/tutor-form">
+                Become a Tutor
+              </a>
+            </li>
           </ul>
         </div>
 
