@@ -20,7 +20,8 @@ public class TutorController {
 	
 	@PostMapping("/saveTutor")	
 	public int register(@RequestBody TutorRegistration tr) {
-		Tutor t = new Tutor(tr.getFirst_name(),tr.getLast_name(),tr.getEmail(),tr.getContact_no(),tr.getAge(),tr.getGender(),tr.getPassward(),new SecurityQuestion(tr.getSque_id()),tr.getAnswer(),new LogIn(tr.getLogin_id()));
+		System.out.println(tr);
+		Tutor t = new Tutor(tr.getFirst_name(),tr.getLast_name(),tr.getEmail(),tr.getContact_no(),tr.getAge(),tr.getGender(),tr.getPassward(),new SecurityQuestion(2),tr.getAnswer(),new LogIn(tr.getLogin_id()));
 		int ret = ts.save(t) ;
 		return ret;
 	}

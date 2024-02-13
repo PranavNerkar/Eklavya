@@ -116,4 +116,13 @@ public class TutorRegistration {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
+
+	@Override
+	public String toString() {
+		return "TutorRegistration [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email
+				+ ", contact_no=" + contact_no + ", age=" + age + ", gender=" + gender + ", passward=" + passward
+				+ ", sque_id=" + sque_id + ", login_id=" + login_id + ", answer=" + answer + "]";
+	}
+	
 }
