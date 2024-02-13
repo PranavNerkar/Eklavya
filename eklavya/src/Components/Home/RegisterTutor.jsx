@@ -1,20 +1,16 @@
 import { useReducer, useState } from "react";
 
 export default function SignupForm() {
-    const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedGender, setSelectedGender] = useState("");
 
-    const securityQue = [
-      "What is the name of your favorite Indian movie?",
-      "What is the name of the street you grew up on?",
-      "What is your favorite Indian dish?",
-      "What is the name of your first pet?",
-      "What is the name of the school you attended in the 10th grade?"
-    ];
-  
-    const handleSelectChange = (event) => {
-      setSelectedOption(event.target.value);
-      console.log("Selected Index:", event.target.value);
-    };
+  const securityQue = [
+    "What is the name of your favorite Indian movie?",
+    "What is the name of the street you grew up on?",
+    "What is your favorite Indian dish?",
+    "What is the name of your first pet?",
+    "What is the name of the school you attended in the 10th grade?",
+  ];
 
   const init = {
     fname: { value: "", valid: false, touched: false, error: "" },
@@ -22,11 +18,11 @@ export default function SignupForm() {
     email: { value: "", valid: false, touched: false, error: "" },
     phone: { value: 0, valid: false, touched: false, error: "" },
     age: { value: 0, valid: false, touched: false, error: "" },
-    gender: { value: 0, valid: false, touched: false, error: "" },
-    pwd: { value: 0, valid: false, touched: false, error: "" },
-    cpwd: { value: 0, valid: false, touched: false, error: "" },
+    gender: selectedGender,
+    pwd: { value: "", valid: false, touched: false, error: "" },
+    cpwd: { value: "", valid: false, touched: false, error: "" },
     question_id: parseInt(selectedOption),
-    answer: { value: 0, valid: false, touched: false, error: "" },
+    answer: { value: "", valid: false, touched: false, error: "" },
     formValid: false,
   };
 
@@ -177,7 +173,6 @@ export default function SignupForm() {
     if (provider.formValid === false) {
       setAlertType("alert-danger");
       showErrorMessage("Please enter valid data", 5000);
-      console.log("Hello");
       return;
     }
 
@@ -218,8 +213,8 @@ export default function SignupForm() {
                   email: provider.email.value,
                   contact_no: provider.phone.value,
                   age: provider.age.value,
-                  gender: provider.gender.value,
-                  sque_id: provider.question_id,
+                  gender: selectedGender,
+                  sque_id: selectedOption,
                   login_id: data2,
                   answer: provider.answer.value,
                   passward: provider.pwd.value,
@@ -242,6 +237,7 @@ export default function SignupForm() {
                 });
             });
         } else {
+          console.log("Email Present");
           setAlertType("alert-info");
           showErrorMessage("Username already exists. Please log in.", 5000);
 
@@ -378,17 +374,23 @@ export default function SignupForm() {
               <label htmlFor="gender" id="gender" className="form-label">
                 Gender
               </label>
-              <select className="form-select">
+              <select
+                className="form-select"
+                value={selectedGender}
+                onChange={(event) =>
+                  setSelectedGender(event.target.value)
+                }
+              >
                 <option id="idgender" className="form-option" value="gender1">
                   Select Gender
                 </option>
-                <option id="idgender" className="form-option" value="gender2">
+                <option id="idgender" className="form-option" value="Male">
                   Male
                 </option>
-                <option id="idgender" className="form-option" value="gender3">
+                <option id="idgender" className="form-option" value="Female">
                   Female
                 </option>
-                <option id="idgender" className="form-option" value="gender4">
+                <option id="idgender" className="form-option" value="Other">
                   Other
                 </option>
               </select>
@@ -406,12 +408,14 @@ export default function SignupForm() {
               <select
                 className="form-select"
                 value={selectedOption}
-                onChange={handleSelectChange}
+                onChange={(event) =>
+                  setSelectedOption(parseInt(event.target.value) + 1)
+                }
               >
                 <option
                   id="squestion"
                   className="form-option"
-                  value="question1"
+                  value={-1}
                 >
                   Select Security Question
                 </option>
@@ -432,7 +436,8 @@ export default function SignupForm() {
                 type="text"
                 className="form-control"
                 id="sanswer"
-                placeholder="Answer... "
+                placeholder="Answer..."
+                onChange={(e) => handleChange("answer", e.target.value)}
               />
             </div>
           </div>
@@ -512,10 +517,7 @@ export default function SignupForm() {
         </div>
       </div>
 
-      {selectedOption !== '' && (
-        <p>Selected Index: {selectedOption}</p>
-        )}
-        <p> {typeof selectedOption} </p>
+      {selectedGender !== "" && <p>Selected Index: {selectedGender} </p>}
     </form>
   );
 }

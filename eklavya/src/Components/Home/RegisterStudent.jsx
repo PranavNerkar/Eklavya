@@ -1,17 +1,28 @@
 import { useReducer, useState } from "react";
 
 export default function StudentRegistrationForm() {
+  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedGender, setSelectedGender] = useState("");
+
+  const securityQue = [
+    "What is the name of your favorite Indian movie?",
+    "What is the name of the street you grew up on?",
+    "What is your favorite Indian dish?",
+    "What is the name of your first pet?",
+    "What is the name of the school you attended in the 10th grade?",
+  ];
+
   const init = {
     fname: { value: "", valid: false, touched: false, error: "" },
     lname: { value: "", valid: false, touched: false, error: "" },
     email: { value: "", valid: false, touched: false, error: "" },
     phone: { value: 0, valid: false, touched: false, error: "" },
     age: { value: 0, valid: false, touched: false, error: "" },
-    gender: { value: 0, valid: false, touched: false, error: "" },
-    pwd: { value: 0, valid: false, touched: false, error: "" },
-    cpwd: { value: 0, valid: false, touched: false, error: "" },
-    question: { value: 0, valid: false, touched: false, error: "" },
-    answer: { value: 0, valid: false, touched: false, error: "" },
+    gender: selectedGender,
+    pwd: { value: "", valid: false, touched: false, error: "" },
+    cpwd: { value: "", valid: false, touched: false, error: "" },
+    question_id: parseInt(selectedOption),
+    answer: { value: "", valid: false, touched: false, error: "" },
     formValid: false,
   };
 
@@ -80,10 +91,10 @@ export default function StudentRegistrationForm() {
     var ispwvalid = false;
     console.log(" pass " + password);
     console.log(" paas confirm" + confirmPassword);
+    provider.formValid = true;
     if (password === confirmPassword) {
       ispwvalid = true;
     }
-    console.log("pw matched: " + ispwvalid);
     return ispwvalid;
   }
 
@@ -100,7 +111,7 @@ export default function StudentRegistrationForm() {
           error = "Invalid Name (Only Alphabets allowed)";
         }
         break;
-  
+
       case "email":
         pattern = /^[a-zA-Z]{3,20}\d{0,5}@/;
         if (!pattern.test(value)) {
@@ -108,7 +119,7 @@ export default function StudentRegistrationForm() {
           error = "Invalid Email address";
         }
         break;
-  
+
       case "phone":
         pattern = /^\d{10}$/;
         if (!pattern.test(value)) {
@@ -116,7 +127,7 @@ export default function StudentRegistrationForm() {
           error = "Invalid Phone Number";
         }
         break;
-  
+
       case "age":
         pattern = /^\d{2}$/;
         if (!pattern.test(value)) {
@@ -124,38 +135,29 @@ export default function StudentRegistrationForm() {
           error = "Enter Proper Age";
         }
         break;
-  
-    //   case "pwd":
-    //     pattern = /^(?=.[a-z])(?=.[A-Z])(?=.*[!@#$%^&]).{8,20}$/;
-    //     if (!pattern.test(value)) {
-    //       valid = false;
-    //       error = "Enter valid Password";
-    //     }
-    //     break;
 
-    case "pwd":
-  pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&]).{8,20}$/;
-  if (!pattern.test(value)) {
-    valid = false;
-    error = "Password must contain at least one lowercase letter, one uppercase letter, one special character, and be between 8 and 20 characters long";
-  }
-  break;
+      case "pwd":
+        pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&]).{8,20}$/;
 
-  
-      case "cpwd":
-        const password = provider.pwd.value;
-        if (password !== value) {
+        if (!pattern.test(value)) {
           valid = false;
-          error = "Passwords do not match";
+          error = "Enter valid Password";
         }
         break;
-  
+
+      case "cpwd":
+        pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&]).{8,20}$/;
+        if (!pattern.test(value)) {
+          valid = false;
+          error = "Password did not matched";
+        }
+        break;
+
       default:
         console.log("default switch");
     }
     return { valid: valid, error: error };
   };
-  
 
   const submitData = (e) => {
     e.preventDefault();
@@ -174,51 +176,68 @@ export default function StudentRegistrationForm() {
       return;
     }
 
-    fetch("http://localhost:9000/checkusernameexist", {
+    fetch("http://localhost:8080/userIdCheck", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username: provider.username.value }),
+      body: JSON.stringify({ user_id: provider.email.value }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data) {
-          fetch("http://localhost:9000/insert", {
+      .then((resp1) => resp1.json())
+      .then((data1) => {
+        if (data1 === 0) {
+          console.log("Email not Present");
+          fetch("http://localhost:8080/saveLogIn", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              fname: provider.fname.value,
-              lname: provider.lname.value,
-              email: provider.email.value,
-              phone: provider.phone.value,
-              age: provider.age.value,
-              gender: provider.gender.value,
-              pwd: provider.pwd.value,
-              question: provider.squestion.value,
-              answer: provider.answer.value,
+              user_id: provider.email.value,
+              password: provider.pwd.value,
+              user_name: provider.fname.value,
+              role_id: 1,
             }),
           })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("insert data: " + data.registered);
-
-              if (data.registered === true) {
-                setAlertType("alert-success");
-                showErrorMessage(
-                  "Registration successful. Please log in.",
-                  5000
-                );
-                return;
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
+            .then((resp2) => resp2.json())
+            .then((data2) => {
+              console.log("Data Inserted in login table at " + data2 + " id");
+              fetch("http://localhost:8080/saveStudent", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  first_name: provider.fname.value,
+                  last_name: provider.lname.value,
+                  email: provider.email.value,
+                  contact_no: provider.phone.value,
+                  age: provider.age.value,
+                  gender: selectedGender,
+                  sque_id: selectedOption,
+                  login_id: data2,
+                  answer: provider.answer.value,
+                  passward: provider.pwd.value,
+                }),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log("insert data AT : " + data);
+                  if (data.registered === true) {
+                    setAlertType("alert-success");
+                    showErrorMessage(
+                      "Registration successful. Please log in.",
+                      5000
+                    );
+                    return;
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
             });
-        }
-        if (data) {
+        } else {
+          console.log("Email Present");
           setAlertType("alert-info");
           showErrorMessage("Username already exists. Please log in.", 5000);
 
@@ -229,7 +248,7 @@ export default function StudentRegistrationForm() {
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Error aala re bho:", error);
       });
   };
 
@@ -237,7 +256,7 @@ export default function StudentRegistrationForm() {
     <form>
       <div className="container mt-5 mb-5 border border-dark rounded ">
         <div className="mt-3 mb-5 display-5 text-center text-primary">
-          <strong><b>User Registration Form</b></strong>
+          <strong>Tutor Registration Form</strong>
         </div>
         {/* Row 1 */}
         <div className="row">
@@ -250,7 +269,7 @@ export default function StudentRegistrationForm() {
                 type="text"
                 className="form-control "
                 id="fname"
-                placeholder="Enter Your First Name"
+                placeholder="Mark"
                 onChange={(e) => handleChange("fname", e.target.value)}
                 onBlur={(e) => handleChange("fname", e.target.value)}
               />
@@ -270,7 +289,7 @@ export default function StudentRegistrationForm() {
                 type="text"
                 className="form-control"
                 id="lname"
-                placeholder="Enter Your Last Name"
+                placeholder="Zuckerberg"
                 onChange={(e) => handleChange("lname", e.target.value)}
                 onBlur={(e) => handleChange("lname", e.target.value)}
               />
@@ -294,7 +313,7 @@ export default function StudentRegistrationForm() {
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="Enter Your Email ID"
+                placeholder="pranavnerkar321@gmail.com"
                 onChange={(e) => handleChange("email", e.target.value)}
                 onBlur={(e) => handleChange("email", e.target.value)}
               />
@@ -314,7 +333,7 @@ export default function StudentRegistrationForm() {
                 type="number"
                 className="form-control"
                 id="number"
-                placeholder="Enter Your Mobile Number"
+                placeholder="9852614280"
                 onChange={(e) => handleChange("phone", e.target.value)}
                 onBlur={(e) => handleChange("phone", e.target.value)}
               />
@@ -339,7 +358,7 @@ export default function StudentRegistrationForm() {
                 className="form-control"
                 id="age"
                 maxLength={2}
-                placeholder="Enter Your Age"
+                placeholder="25"
                 onChange={(e) => handleChange("age", e.target.value)}
                 onBlur={(e) => handleChange("age", e.target.value)}
               />
@@ -355,17 +374,23 @@ export default function StudentRegistrationForm() {
               <label htmlFor="gender" id="gender" className="form-label">
                 Gender
               </label>
-              <select className="form-select">
+              <select
+                className="form-select"
+                value={selectedGender}
+                onChange={(event) =>
+                  setSelectedGender(event.target.value)
+                }
+              >
                 <option id="idgender" className="form-option" value="gender1">
                   Select Gender
                 </option>
-                <option id="idgender" className="form-option" value="gender2">
+                <option id="idgender" className="form-option" value="Male">
                   Male
                 </option>
-                <option id="idgender" className="form-option" value="gender3">
+                <option id="idgender" className="form-option" value="Female">
                   Female
                 </option>
-                <option id="idgender" className="form-option" value="gender4">
+                <option id="idgender" className="form-option" value="Other">
                   Other
                 </option>
               </select>
@@ -380,49 +405,25 @@ export default function StudentRegistrationForm() {
               <label htmlFor="squestion" className="form-label">
                 Security Question
               </label>
-              <select className="form-select">
+              <select
+                className="form-select"
+                value={selectedOption}
+                onChange={(event) =>
+                  setSelectedOption(parseInt(event.target.value) + 1)
+                }
+              >
                 <option
                   id="squestion"
                   className="form-option"
-                  value="question1"
+                  value={-1}
                 >
                   Select Security Question
                 </option>
-                <option
-                  id="squestion"
-                  className="form-option"
-                  value="question2"
-                >
-                  What is the name of your favorite Indian movie?
-                </option>
-                <option
-                  id="squestion"
-                  className="form-option"
-                  value="question3"
-                >
-                  What is the name of the street you grew up on?
-                </option>
-                <option
-                  id="squestion"
-                  className="form-option"
-                  value="question4"
-                >
-                  What is your favorite Indian dish?
-                </option>
-                <option
-                  id="squestion"
-                  className="form-option"
-                  value="question5"
-                >
-                  What is the name of your first pet?
-                </option>
-                <option
-                  id="squestion"
-                  className="form-option"
-                  value="question6"
-                >
-                  What is the name of the school you attended in the 10th grade?
-                </option>
+                {securityQue.map((question, index) => (
+                  <option key={index} value={index}>
+                    {question}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -435,7 +436,8 @@ export default function StudentRegistrationForm() {
                 type="text"
                 className="form-control"
                 id="sanswer"
-                placeholder="Answer... "
+                placeholder="Answer..."
+                onChange={(e) => handleChange("answer", e.target.value)}
               />
             </div>
           </div>
@@ -515,7 +517,7 @@ export default function StudentRegistrationForm() {
         </div>
       </div>
 
-      {/* {JSON.stringify(provider) + ""} */}
+      {selectedGender !== "" && <p>Selected Index: {selectedGender} </p>}
     </form>
   );
 }

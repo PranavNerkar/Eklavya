@@ -1,7 +1,7 @@
 package com.example.demo;
 
 
-public class TutorRegistration {
+public class Registration {
 
 	private String first_name;
 	private String last_name;
@@ -15,12 +15,12 @@ public class TutorRegistration {
 	private int login_id;
 	private String answer;
 	
-	public TutorRegistration() {
+	public Registration() {
 		// TODO Auto-generated constructor stub
 	}
 	
 
-	public TutorRegistration(String first_name, String last_name, String email, String contact_no, int age,
+	public Registration(String first_name, String last_name, String email, String contact_no, int age,
 			String gender, String passward, int sque_id, int login_id, String answer) {
 		super();
 		this.first_name = first_name;
