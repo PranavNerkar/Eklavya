@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.TutorRegistration;
 import com.example.demo.Entities.LogIn;
-import com.example.demo.Entities.Role;
+import com.example.demo.Entities.SecurityQuestion;
 import com.example.demo.Entities.Tutor;
-import com.example.demo.Service.LoginService;
 import com.example.demo.Service.TutorService;
 
 @RestController
@@ -18,18 +18,10 @@ public class TutorController {
 	@Autowired
 	TutorService ts;
 	
-	@Autowired
-	LoginService ls;
-	
-	@PostMapping("/tutor_register")	
-	public int register(@RequestBody Tutor t) {
-		LogIn l = new LogIn(t.getEmail(),t.getPassward(),new Role(2),t.getFirst_name()) ;
-		int res = ls.save(l);
-		if(res == -1 ) {
-			return res ;
-		}else {
-			t.setLogin(l) ;
-		}
-		return ts.save(t) ;
+	@PostMapping("/saveTutor")	
+	public int register(@RequestBody TutorRegistration tr) {
+		Tutor t = new Tutor(tr.getFirst_name(),tr.getLast_name(),tr.getEmail(),tr.getContact_no(),tr.getAge(),tr.getGender(),tr.getPassward(),new SecurityQuestion(tr.getSque_id()),tr.getAnswer(),new LogIn(tr.getLogin_id()));
+		int ret = ts.save(t) ;
+		return ret;
 	}
 }

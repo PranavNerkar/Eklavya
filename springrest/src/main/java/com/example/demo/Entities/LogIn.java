@@ -23,22 +23,31 @@ public class LogIn {
 	@Column
 	String password;
 	
+	@Column
+	String user_name;
+
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	Role role ;
 	
-	@Column
-	String user_name;
-
-
-	public LogIn(String user_id, String password, Role role ,String user_name ) {
+	public LogIn(String user_name ,String user_id, String password, Role role) {
 		super();
+		this.user_name = user_name;
 		this.user_id = user_id;
 		this.password = password;
 		this.role = role;
-		this.user_name = user_name;
 	}
-		
+	
+	public LogIn(String user_id) {
+		super();
+		this.user_id = user_id;
+	}
+
+	public LogIn(int login_id) {
+		super();
+		this.login_id = login_id;
+	}
+
 	public LogIn() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -82,6 +91,12 @@ public class LogIn {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+
+	@Override
+	public String toString() {
+		return "LogIn [login_id=" + login_id + ", user_id=" + user_id + ", password=" + password + ", role=" + role
+				+ ", user_name=" + user_name + "]";
 	}
 	
 }
