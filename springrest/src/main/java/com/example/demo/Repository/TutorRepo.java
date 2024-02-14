@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Entities.Tutor;
 
 import jakarta.transaction.Transactional;
-
+import java.util.List;
 @Repository
 @Transactional
 public interface TutorRepo extends JpaRepository<Tutor, Integer> {
 //	@Modifying
 //	@Query("update Patient set contact = ?2 where pid =?1")
 //	public int updateContact(int pid,String contact);
+	
 }
