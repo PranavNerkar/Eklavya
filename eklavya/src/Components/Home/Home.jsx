@@ -6,7 +6,9 @@ import Footer from "./Footer";
 import Login from "./Login";
 import Register from "./Register";
 import SignupForm from "./RegisterStudent";
-
+import CarouselComponent from "./Carousel";
+import TeachPage from "./TeachPage";
+  
 const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegistration, setShowRegister] = useState(false);
@@ -40,8 +42,11 @@ const Home = () => {
       {showRegistration && <SignupForm />}
 
       {<Info />}
+      {<CarouselComponent />}
       {<Feedback />}
-      <Footer />
+      {<Footer />}
+      
+
     </div>
   );
 };
