@@ -10,7 +10,7 @@ public class Course {
     @Column(nullable = false) // Ensure that the name cannot be null in the database
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Many courses can belong to one category
+    @ManyToOne(fetch = FetchType.EAGER) // Many courses can belong to one category
     private Category category;
 
     public Course() {

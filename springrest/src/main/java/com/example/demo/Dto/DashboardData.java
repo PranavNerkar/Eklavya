@@ -1,6 +1,11 @@
-package com.example.demo.Entities;
+package com.example.demo.Dto;
 
 import java.util.List;
+
+import com.example.demo.Entities.Category;
+import com.example.demo.Entities.Course;
+import com.example.demo.Entities.Feedback;
+import com.example.demo.Entities.Tutor;
 
 public class DashboardData {
     private List<Category> categories;

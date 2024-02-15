@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import com.example.demo.Registration;
+import com.example.demo.Dto.DashboardData;
 import com.example.demo.Entities.*;
 
 import com.example.demo.Service.StudentService;
@@ -27,19 +28,21 @@ public class StudentController {
         int studentId = studentService.save(s);
         return ResponseEntity.ok(studentId); // Return the student ID    
     }
-    @GetMapping("/student/{studentId}/dashboard")
-    public ResponseEntity<DashboardData> getDashboard(@PathVariable int studentId) {
-        // Fetch dashboard data based on the student's ID
-    	List<Course> allCourses = studentService.getAllCourses();
+    @GetMapping("/student/{studentId}")
+    public DashboardData getDashboard(@PathVariable int studentId) {
+//        // Fetch dashboard data based on the student's ID
+       List<Course> allCourses = studentService.getAllCourses();
+       
         List<Tutor> allTutors = studentService.getAllTutors();
         List<Category> allCategories = studentService.getAllCategories();
-       
         List<Feedback> feedback = studentService.getAllFeedbackByStudentId(studentId);
 
         // Assemble the dashboard data into a DashboardData object
         DashboardData dashboardData = new DashboardData(allCategories, allCourses, allTutors, feedback);
 
         // Return the dashboard data in the response
-        return ResponseEntity.ok(dashboardData);
+       return dashboardData;
+    	
     }
+
 }
