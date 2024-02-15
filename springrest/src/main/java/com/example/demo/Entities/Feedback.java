@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 
 @Data // Lombok annotation to generate getters, setters, toString, equals, and hashCode methods
 @Entity
-@AllArgsConstructor
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +21,21 @@ public class Feedback {
     private int rating;
 
     private String comments;
+    
+    
+    
+	public Feedback() {
+		super();
+	}
+
+	public Feedback(Long id, Long studentId, Long courseId, int rating, String comments) {
+		super();
+		this.id = id;
+		this.studentId = studentId;
+		this.courseId = courseId;
+		this.rating = rating;
+		this.comments = comments;
+	}
 
 	public Long getStudentId() {
 		return studentId;
