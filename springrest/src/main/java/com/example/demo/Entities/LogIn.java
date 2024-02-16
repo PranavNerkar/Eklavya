@@ -30,12 +30,16 @@ public class LogIn {
 	@JoinColumn(name="role_id")
 	Role role ;
 	
-	public LogIn(String user_name ,String user_id, String password, Role role) {
+	@Column(name = "flag")
+    private int flag;
+	
+	public LogIn(String user_name ,String user_id, String password, Role role, int flag) {
 		super();
 		this.user_name = user_name;
 		this.user_id = user_id;
 		this.password = password;
 		this.role = role;
+		this.flag = flag;
 	}
 	
 	public LogIn(String user_id) {
@@ -92,6 +96,14 @@ public class LogIn {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+	 public int getFlag() {
+	        return flag;
+	    }
+
+	    public void setFlag(int flag) {
+	        this.flag = flag;
+	    }
+	
 
 	@Override
 	public String toString() {

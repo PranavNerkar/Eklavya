@@ -3,54 +3,67 @@ package com.example.demo.Entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
+import java.sql.Date;
 
 import jakarta.persistence.*;
 
-@Data // Lombok annotation to generate getters, setters, toString, equals, and hashCode methods
+@Data 
 @Entity
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "feedback_id")
+    private Long feedbackId;
 
-    private Long studentId;
+    @Column(name = "user_id")
+    private Long userId;
 
-    private Long courseId;
+    @Column(name = "comment")
+    private String comments;
 
+    @Column(name = "rating")
     private int rating;
 
-    private String comments;
+    @Column(name = "feedback_date")
+    private Date feedbackDate;
+
+    @Column(name = "coursetutor_id")
+    private Long courseTutorId;
     
-    
-    
-	public Feedback() {
-		super();
+    public Feedback() {
+        // Default constructor
+    }
+
+    public Feedback(Long userId, String comments, int rating, Date feedbackDate, Long courseTutorId) {
+        this.userId = userId;
+        this.comments = comments;
+        this.rating = rating;
+        this.feedbackDate = feedbackDate;
+        this.courseTutorId = courseTutorId;
+    }
+
+	public Long getFeedbackId() {
+		return feedbackId;
 	}
 
-	public Feedback(Long id, Long studentId, Long courseId, int rating, String comments) {
-		super();
-		this.id = id;
-		this.studentId = studentId;
-		this.courseId = courseId;
-		this.rating = rating;
+	public void setFeedbackId(Long feedbackId) {
+		this.feedbackId = feedbackId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
 		this.comments = comments;
-	}
-
-	public Long getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
-	}
-
-	public Long getCourseId() {
-		return courseId;
-	}
-
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
 	}
 
 	public int getRating() {
@@ -61,11 +74,26 @@ public class Feedback {
 		this.rating = rating;
 	}
 
-	public String getComments() {
-		return comments;
+	public Date getFeedbackDate() {
+		return feedbackDate;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setFeedbackDate(Date feedbackDate) {
+		this.feedbackDate = feedbackDate;
 	}
+
+	public Long getCourseTutorId() {
+		return courseTutorId;
+	}
+
+	public void setCourseTutorId(Long courseTutorId) {
+		this.courseTutorId = courseTutorId;
+	}
+
+	@Override
+	public String toString() {
+		return "Feedback [feedbackId=" + feedbackId + ", userId=" + userId + ", comments=" + comments + ", rating="
+				+ rating + ", feedbackDate=" + feedbackDate + ", courseTutorId=" + courseTutorId + "]";
+	}
+    	
 }

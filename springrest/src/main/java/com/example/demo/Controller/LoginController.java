@@ -37,7 +37,7 @@ public class LoginController {
 	
 	@PostMapping("/saveLogIn")
 	public int saveLogin(@RequestBody LoginRequest lReq) {
-		LogIn l = new LogIn(lReq.getUser_name(),lReq.getUser_id(),lReq.getPassword(),new Role(lReq.getRole_id())) ;
+		LogIn l = new LogIn(lReq.getUser_name(),lReq.getUser_id(),lReq.getPassword(),new Role(lReq.getRole_id()),lReq.getFlag()) ;
 		int s = ls.save(l) ;
 		return s ;
 	}

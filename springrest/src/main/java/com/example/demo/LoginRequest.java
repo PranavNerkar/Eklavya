@@ -6,17 +6,19 @@ public class LoginRequest {
 	 private String password;
 	 private String user_name;
 	 private int role_id;
+	 private int flag;
 	
 	public LoginRequest() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LoginRequest(String user_id, String password, String user_name, int role_id) {
+	public LoginRequest(String user_id, String password, String user_name, int role_id,int flag) {
 		super();
 		this.user_id = user_id;
 		this.password = password;
 		this.user_name = user_name;
 		this.role_id = role_id;
+		this.flag = flag;
 	}
 
 	public String getUser_id() {
@@ -50,6 +52,15 @@ public class LoginRequest {
 	public void setRole_id(int role_id) {
 		this.role_id = role_id;
 	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	
 	
 	
 }

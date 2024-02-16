@@ -8,7 +8,7 @@ public class TutorDTO {
 	    private String contactNo;
 	    private int age;
 	    private String gender;
-	    private String password;
+	  
 	    private String aadharNo;
 	    private String country;
 	    private String state;
@@ -20,7 +20,7 @@ public class TutorDTO {
 	    private String answer;
 	    private String loginUsername;
 		public TutorDTO(int tutId, String firstName, String lastName, String email, String contactNo, int age,
-				String gender, String password, String aadharNo, String country, String state, String city,
+				String gender, String aadharNo, String country, String state, String city,
 				int experience, String aboutYou, int active, String securityQuestion, String answer,
 				String loginUsername) {
 			super();
@@ -31,7 +31,7 @@ public class TutorDTO {
 			this.contactNo = contactNo;
 			this.age = age;
 			this.gender = gender;
-			this.password = password;
+		
 			this.aadharNo = aadharNo;
 			this.country = country;
 			this.state = state;
@@ -85,12 +85,8 @@ public class TutorDTO {
 		public void setGender(String gender) {
 			this.gender = gender;
 		}
-		public String getPassword() {
-			return password;
-		}
-		public void setPassword(String password) {
-			this.password = password;
-		}
+		
+		
 		public String getAadharNo() {
 			return aadharNo;
 		}
@@ -154,8 +150,7 @@ public class TutorDTO {
 		@Override
 		public String toString() {
 			return "TutorDTO [tutId=" + tutId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-					+ email + ", contactNo=" + contactNo + ", age=" + age + ", gender=" + gender + ", password="
-					+ password + ", aadharNo=" + aadharNo + ", country=" + country + ", state=" + state + ", city="
+					+ email + ", contactNo=" + contactNo + ", age=" + age + ", gender=" + gender + ", aadharNo=" + aadharNo + ", country=" + country + ", state=" + state + ", city="
 					+ city + ", experience=" + experience + ", aboutYou=" + aboutYou + ", active=" + active
 					+ ", securityQuestion=" + securityQuestion + ", answer=" + answer + ", loginUsername="
 					+ loginUsername + "]";

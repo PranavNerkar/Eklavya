@@ -19,13 +19,13 @@ public class Tutor {
 	int tut_id;
 	
 	@Column
-	String first_name;
+	String first_name ;
 	
 	@Column
-	String last_name;
+	String last_name ;
 	
 	@Column
-	String email;
+	String email ;
 	
 	@Column
 	String contact_no ;
@@ -34,31 +34,30 @@ public class Tutor {
 	int age;
 	
 	@Column
-	String gender;
+	String gender ;
+	
+	
 	
 	@Column
-	String password;
+	String aadhar_no ;
 	
 	@Column
-	String aadhar_no;
-	
-	@Column
-	String country;
+	String country ;
 	
 	@Column
 	String state ;
 	
 	@Column
-	String city;
+	String city ;
 	
 	@Column
-	int experience;
+	int experience ;
 	
 	@Column
-	String about_you;
+	String about_you ;
 
 	@Column
-	int active;
+	int active ;
 	
 	@ManyToOne
 	@JoinColumn(name="sque_id")
@@ -78,7 +77,7 @@ public class Tutor {
 	}
 
 	public Tutor(int tut_id, String first_name, String last_name, String email, String contact_no, int age,
-			String gender, String password, String aadhar_no, String country, String state, String city, int experience,
+			String gender, String aadhar_no, String country, String state, String city, int experience,
 			String about_you, int active, SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.tut_id = tut_id;
@@ -88,7 +87,6 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.aadhar_no = aadhar_no;
 		this.country = country;
 		this.state = state;
@@ -102,7 +100,7 @@ public class Tutor {
 	}
 
 	public Tutor(String first_name, String last_name, String email, String contact_no, int age, String gender,
-			String password, SecurityQuestion sq, String answer, LogIn login) {
+	 SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -110,7 +108,7 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
+	
 		this.sq = sq;
 		this.answer = answer;
 		this.login = login;
@@ -172,14 +170,6 @@ public class Tutor {
 		this.gender = gender;
 	}
 	
-	public String getPassward() {
-		return password;
-	}
-
-	public void setPassward(String password) {
-		this.password = password;
-	}
-
 	public String getAadhar_no() {
 		return aadhar_no;
 	}
@@ -263,8 +253,7 @@ public class Tutor {
 	@Override
 	public String toString() {
 		return "Tutor [tut_id=" + tut_id + ", first_name=" + first_name + ", last_name=" + last_name + ", email="
-				+ email + ", contact_no=" + contact_no + ", age=" + age + ", gender=" + gender + ", passward="
-				+ password + ", aadhar_no=" + aadhar_no + ", country=" + country + ", state=" + state + ", city=" + city
+				+ email + ", contact_no=" + contact_no + ", age=" + age + ", gender=" + gender + ", aadhar_no=" + aadhar_no + ", country=" + country + ", state=" + state + ", city=" + city
 				+ ", experience=" + experience + ", about_you=" + about_you + ", active=" + active + ", sq=" + sq
 				+ ", answer=" + answer + ", login=" + login + "]";
 	}

@@ -49,8 +49,8 @@ public class StudentService {
         return tutorRepository.findAll();
     }
 
-    public List<Feedback> getAllFeedbackByStudentId(int studentId) {
+    public List<Feedback> getAllFeedback() {
         // Implement logic to fetch feedback based on student's ID
-        return feedbackRepository.findAllByStudentId(studentId);
+        return feedbackRepository.findAll();
    }
 }
