@@ -19,9 +19,9 @@ const CarouselComponent = () => {
           <Carousel.Caption>
             {/* <h3>First slide label</h3> */}
             <h1>Got a dream?</h1>
-            <p><h3>We have thousands of real-world experts that can help. 
-              Start learning the skills you need to make it happen.</h3></p>
-            <p><h3>Our real-world experts can’t wait to share their experience to help you grow.</h3></p>
+            <h3>We have thousands of real-world experts that can help. 
+              Start learning the skills you need to make it happen.</h3>
+            <h3>Our real-world experts can’t wait to share their experience to help you grow.</h3>
           </Carousel.Caption>
         </Carousel.Item>
 

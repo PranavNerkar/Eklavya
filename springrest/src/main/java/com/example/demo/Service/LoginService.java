@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,15 @@ public class LoginService {
 	
 	public LogIn getLoginConformation(String user_id , String password)
 	{
-		LogIn l = lr.getLogin(user_id, password) ;
-		System.out.println(l);
-		if(l != null) {
-			return l ;
+		LogIn l ;
+		Optional<LogIn> ol = lr.getLogin(user_id, password) ;
+		try {
+			l = ol.get();
+		}catch(Exception e) {
+			l = null ;
 		}
-		return null ;
+		return l ;
+		
 	}
 	
 	public int check(String s)

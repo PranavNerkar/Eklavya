@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const Footer = () => {
   return (
-    <div>
+    <div id="contact">
       <footer className="bg-dark text-light py-4">
         <div className="container">
           <div className="row">

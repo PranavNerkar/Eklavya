@@ -1,13 +1,12 @@
 package com.example.demo.Repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.Entities.LogIn;
-import com.example.demo.Entities.Role;
 
 import jakarta.transaction.Transactional;
 
@@ -16,7 +15,7 @@ import jakarta.transaction.Transactional;
 public interface LoginRepo extends JpaRepository<LogIn, Integer> {
 	
 	@Query("SELECT l FROM LogIn l WHERE user_id=?1 and password=?2")
-	public LogIn getLogin(String user_id,String password);
+	public Optional<LogIn> getLogin(String user_id,String password);
 	
 	@Query("SELECT COUNT(*) FROM LogIn l WHERE user_id=?1")
 	public int check(String user_id);

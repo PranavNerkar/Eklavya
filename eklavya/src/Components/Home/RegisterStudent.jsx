@@ -256,7 +256,7 @@ export default function StudentRegistrationForm() {
     <form>
       <div className="container mt-5 mb-5 border border-dark rounded ">
         <div className="mt-3 mb-5 display-5 text-center text-primary">
-          <strong>Tutor Registration Form</strong>
+          <strong>Student Registration Form</strong>
         </div>
         {/* Row 1 */}
         <div className="row">

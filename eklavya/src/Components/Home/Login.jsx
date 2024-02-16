@@ -24,7 +24,7 @@ const Login = () => {
   const [flag, setFlag] = useState(false);
 
   const setMessage = () => {
-    if (msg == -1) {
+    if (msg === -1) {
       return "Check Credentials Correctly";
     } else {
       return "";
@@ -33,7 +33,6 @@ const Login = () => {
 
   const submitData = (e) => {
     e.preventDefault();
-    setFlag(true);
 
     const reqOption = {
       method: "post",
@@ -45,26 +44,34 @@ const Login = () => {
     };
 
     fetch("http://localhost:8080/login", reqOption)
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return resp.json();
+      })
       .then((data) => {
-        if (data.login_id == -1) {
-          console.log(data.login_id);
-          setFlag(true);
+        if (data === null) {
           setMsg(-1);
+          setFlag(true);
         } else {
-          var v = data.user_name;
+          // var v = data.user_name;
           if (data.role.role_id == 1) {
-            navigate("/Student_" + v);
+            navigate("/Student", { state: { data } });
           } else if (data.role.role_id == 2) {
-            navigate("/Tutor_" + v);
+            navigate("/Tutor", { state: { data } });
           } else if (data.role.role_id == 3) {
-            navigate("/Admin_" + v);
+            navigate("/Admin", { state: { data } });
           }
         }
+      })
+      .catch((error) => {
+        setMsg(-1) ;
+        setFlag(true);
       });
   };
   return (
-    <div
+    <div id="login"
       style={{ backgroundColor: "rgb(213, 226, 247)" }}
       className="login template d-flex justify-content-center align-items-center vh-100"
     >
@@ -88,7 +95,6 @@ const Login = () => {
               }}
             />
           </div>
-
           <div className="mb-2">
             <label htmlFor="password">Password</label>
             <input
@@ -125,7 +131,6 @@ const Login = () => {
           >
             <p>{setMessage()}</p>
           </div>
-
           <div className="d-flex">
             <input
               type="submit"
@@ -147,7 +152,6 @@ const Login = () => {
               }}
             />
           </div>
-
           <div className="mt-2">
             <a href="">Forget Password?</a>
           </div>
