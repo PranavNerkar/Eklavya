@@ -22,9 +22,6 @@ public class LoginController {
 	public LogIn getLogin(@RequestBody LogIn l) {
 //		return "Success" ;
 		LogIn log = ls.getLoginConformation(l.getUser_id(), l.getPassword()) ;
-		if(log == null) {
-			log = new LogIn(-1) ;
-		}
 		return log ;
 	}
 	
