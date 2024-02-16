@@ -1,0 +1,47 @@
+package com.example.demo.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Entities.Student;
+import com.example.demo.Repository.StudentRepo;
+
+@Service
+public class StudentService {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private TutorRepository tutorRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
+    public int save(Student s) {
+        return sr.save(s).getStu_id();
+    }
+
+    public List<Category> getAllCategoriesByStudentId(int studentId) {
+        // Implement logic to fetch categories based on student's ID
+        return categoryRepository.findAllByStudentId(studentId);
+    }
+
+    public List<Course> getAllCoursesByStudentId(int studentId) {
+        // Implement logic to fetch courses based on student's ID
+        return courseRepository.findAllByStudentId(studentId);
+    }
+
+    public List<Tutor> getAllTutorsByStudentId(int studentId) {
+        // Implement logic to fetch tutors based on student's ID
+        return tutorRepository.findAllByStudentId(studentId);
+    }
+
+    /*public List<Feedback> getAllFeedbackByStudentId(int studentId) {
+        // Implement logic to fetch feedback based on student's ID
+        return feedbackRepository.findAllByStudentId(studentId);*/
+    }
+}

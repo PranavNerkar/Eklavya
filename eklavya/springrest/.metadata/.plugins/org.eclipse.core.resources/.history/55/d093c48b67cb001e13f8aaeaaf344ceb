@@ -1,0 +1,19 @@
+package com.example.demo.Entities;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Category {
+	
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+
+	    private String name;
+
+	    // Constructors, getters, setters, and other properties...
+
+	    // Getters and setters
+}
+
+

@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Shree\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\SUSH\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Final Project\\Eklavya\\EklavyaNet\\EklavyaNet.csproj",
+      "projectUniqueName": "C:\\Users\\SUSH\\Desktop\\Project Major\\Latest_git\\Eklavya\\EklavyaNet\\EklavyaNet.csproj",
       "projectName": "EklavyaNet",
-      "projectPath": "D:\\Final Project\\Eklavya\\EklavyaNet\\EklavyaNet.csproj",
-      "packagesPath": "C:\\Users\\Shree\\.nuget\\packages\\",
-      "outputPath": "D:\\Final Project\\Eklavya\\EklavyaNet\\obj\\",
+      "projectPath": "C:\\Users\\SUSH\\Desktop\\Project Major\\Latest_git\\Eklavya\\EklavyaNet\\EklavyaNet.csproj",
+      "packagesPath": "C:\\Users\\SUSH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SUSH\\Desktop\\Project Major\\Latest_git\\Eklavya\\EklavyaNet\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Shree\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\SUSH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

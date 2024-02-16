@@ -1,0 +1,28 @@
+package com.example.demo.Entities;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    
+    
+
+	public Course() {
+		super();
+	}
+
+
+
+	public Course(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+   
+}

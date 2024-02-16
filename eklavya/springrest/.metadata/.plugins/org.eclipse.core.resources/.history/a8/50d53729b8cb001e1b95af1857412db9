@@ -1,0 +1,65 @@
+package com.example.demo.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Dto.*;
+
+import com.example.demo.Entities.*;
+import com.example.demo.Service.StudentService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+public class DashboardController {
+
+    private final StudentService studentService;
+
+    public DashboardController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @GetMapping("/student/{studentId}")
+    public DashboardDataDTO getDashboard(@PathVariable int studentId) {
+        // Fetch dashboard data based on the student's ID
+        List<CourseDTO> allCourses = studentService.getAllCourses().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        List<TutorDTO> allTutors = studentService.getAllTutors().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        List<CategoryDTO> allCategories = studentService.getAllCategories().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        List<FeedbackDTO> feedback = studentService.getAllFeedbackByStudentId(studentId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        // Assemble the dashboard data into a DashboardDataDTO object
+        DashboardDataDTO dashboardData = new DashboardDataDTO(allCategories, allCourses, allTutors, feedback);
+
+        // Return the dashboard data in the response
+        return dashboardData;
+    }
+
+    // Mapping methods to convert entities to DTOs
+    private CourseDTO convertToDTO(Course course) {
+        // Implement the conversion logic
+    }
+
+    private TutorDTO convertToDTO(Tutor tutor) {
+        // Implement the conversion logic
+    }
+
+    private CategoryDTO convertToDTO(Category category) {
+        // Implement the conversion logic
+    }
+
+    private FeedbackDTO convertToDTO(Feedback feedback) {
+        // Implement the conversion logic
+    }
+}

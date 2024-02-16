@@ -1,0 +1,18 @@
+package com.example.demo.Entities;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    // Other properties such as description, category (possibly as a foreign key), etc.
+
+    // Constructors, getters, setters, and other properties...
+
+    // Getters and setters
+}
