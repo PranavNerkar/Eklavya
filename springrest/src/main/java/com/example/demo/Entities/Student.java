@@ -38,8 +38,8 @@ public class Student {
 	@Column
 	String gender;
 	
-	@Column
-	String password;
+//	@Column
+//	String password;
 	
 	@Column
 	String aadhar_no;
@@ -65,12 +65,12 @@ public class Student {
 	@Column
 	Date dob;
 	
+	@Column
+	String answer;
+	
 	@ManyToOne
 	@JoinColumn(name="sque_id")
 	SecurityQuestion sq ;
-
-	@Column
-	String answer;
 	
 	@OneToOne
 	@JoinColumn(name="login_id")
@@ -82,7 +82,7 @@ public class Student {
 	}
 
 	public Student(int stu_id, String first_name, String last_name, String email, String contact_no, int age,
-			String gender, String password, String aadhar_no, String country, String state, String city, String stream,
+			String gender, String aadhar_no, String country, String state, String city, String stream,
 			String address, int active, Date dob, SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.stu_id = stu_id;
@@ -92,7 +92,6 @@ public class Student {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.aadhar_no = aadhar_no;
 		this.country = country;
 		this.state = state;
@@ -107,7 +106,7 @@ public class Student {
 	}
 
 	public Student(String first_name, String last_name, String email, String contact_no, int age, String gender,
-			String password,SecurityQuestion sq,String answer, LogIn login) {
+			SecurityQuestion sq,String answer, LogIn login) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -115,7 +114,6 @@ public class Student {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.sq = sq;
 		this.answer = answer;
 		this.login = login;
@@ -175,14 +173,6 @@ public class Student {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getAadhar_no() {

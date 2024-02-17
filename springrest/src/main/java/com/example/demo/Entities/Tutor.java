@@ -1,11 +1,16 @@
 package com.example.demo.Entities;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -37,9 +42,6 @@ public class Tutor {
 	String gender;
 	
 	@Column
-	String password;
-	
-	@Column
 	String aadhar_no;
 	
 	@Column
@@ -60,26 +62,32 @@ public class Tutor {
 	@Column
 	int active;
 	
+	@Column
+	String answer;
+	
 	@ManyToOne
 	@JoinColumn(name="sque_id")
 	SecurityQuestion sq ;
 	
-	@Column
-	String answer;
-	
 	@OneToOne
 	@JoinColumn(name="login_id")
 	LogIn login;
-	
 
+	@ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name="course_tutor",
+    			joinColumns = @JoinColumn(name="tut_id") ,
+    			inverseJoinColumns = @JoinColumn(name="course_id")
+    )
+    private Set<Course> courses ;
+	
 	public Tutor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Tutor(int tut_id, String first_name, String last_name, String email, String contact_no, int age,
-			String gender, String password, String aadhar_no, String country, String state, String city, int experience,
-			String about_you, int active, SecurityQuestion sq, String answer, LogIn login) {
+			String gender, String aadhar_no, String country, String state, String city, int experience,
+			String about_you, int active, String answer, SecurityQuestion sq, LogIn login, Set<Course> courses) {
 		super();
 		this.tut_id = tut_id;
 		this.first_name = first_name;
@@ -88,7 +96,6 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.aadhar_no = aadhar_no;
 		this.country = country;
 		this.state = state;
@@ -96,13 +103,14 @@ public class Tutor {
 		this.experience = experience;
 		this.about_you = about_you;
 		this.active = active;
-		this.sq = sq;
 		this.answer = answer;
+		this.sq = sq;
 		this.login = login;
+		this.courses = courses;
 	}
 
 	public Tutor(String first_name, String last_name, String email, String contact_no, int age, String gender,
-			String password, SecurityQuestion sq, String answer, LogIn login) {
+			 SecurityQuestion sq, String answer, LogIn login) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -110,7 +118,6 @@ public class Tutor {
 		this.contact_no = contact_no;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.sq = sq;
 		this.answer = answer;
 		this.login = login;
@@ -170,14 +177,6 @@ public class Tutor {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-	
-	public String getPassward() {
-		return password;
-	}
-
-	public void setPassward(String password) {
-		this.password = password;
 	}
 
 	public String getAadhar_no() {
@@ -260,11 +259,19 @@ public class Tutor {
 		this.login = login;
 	}
 
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
+
 	@Override
 	public String toString() {
 		return "Tutor [tut_id=" + tut_id + ", first_name=" + first_name + ", last_name=" + last_name + ", email="
 				+ email + ", contact_no=" + contact_no + ", age=" + age + ", gender=" + gender + ", passward="
-				+ password + ", aadhar_no=" + aadhar_no + ", country=" + country + ", state=" + state + ", city=" + city
+				+ ", aadhar_no=" + aadhar_no + ", country=" + country + ", state=" + state + ", city=" + city
 				+ ", experience=" + experience + ", about_you=" + about_you + ", active=" + active + ", sq=" + sq
 				+ ", answer=" + answer + ", login=" + login + "]";
 	}

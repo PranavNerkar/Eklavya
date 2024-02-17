@@ -1,99 +1,97 @@
 package com.example.demo.Entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.sql.Date;
-
 import jakarta.persistence.*;
 
-@Data 
 @Entity
+@Table(name="feedback")
 public class Feedback {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "feedback_id")
-    private Long feedbackId;
+    private int feedback_id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @Column()
+    private String comment;
+    
+    @Column()
+    private double rating;
 
-    @Column(name = "comment")
-    private String comments;
-
-    @Column(name = "rating")
-    private int rating;
-
-    @Column(name = "feedback_date")
-    private Date feedbackDate;
-
-    @Column(name = "coursetutor_id")
-    private Long courseTutorId;
+    @Column()
+    private Date feedback_date;
+    
+    @ManyToOne
+    @JoinColumn(name="stu_id")
+    private Student student;
+    
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name="tut_id", referencedColumnName="tut_id"),
+        @JoinColumn(name="course_id", referencedColumnName="course_id")
+    })
+    private CourseTutor courseTutor;
     
     public Feedback() {
         // Default constructor
     }
 
-    public Feedback(Long userId, String comments, int rating, Date feedbackDate, Long courseTutorId) {
-        this.userId = userId;
-        this.comments = comments;
-        this.rating = rating;
-        this.feedbackDate = feedbackDate;
-        this.courseTutorId = courseTutorId;
-    }
-
-	public Long getFeedbackId() {
-		return feedbackId;
+	public Feedback(int feedback_id, String comment, double rating, Date feedback_date, Student student,
+			CourseTutor courseTutor) {
+		super();
+		this.feedback_id = feedback_id;
+		this.comment = comment;
+		this.rating = rating;
+		this.feedback_date = feedback_date;
+		this.student = student;
+		this.courseTutor = courseTutor;
 	}
 
-	public void setFeedbackId(Long feedbackId) {
-		this.feedbackId = feedbackId;
+	public int getFeedback_id() {
+		return feedback_id;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public void setFeedback_id(int feedback_id) {
+		this.feedback_id = feedback_id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public String getComment() {
+		return comment;
 	}
 
-	public String getComments() {
-		return comments;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
-	public Date getFeedbackDate() {
-		return feedbackDate;
+	public Date getFeedback_date() {
+		return feedback_date;
 	}
 
-	public void setFeedbackDate(Date feedbackDate) {
-		this.feedbackDate = feedbackDate;
+	public void setFeedback_date(Date feedback_date) {
+		this.feedback_date = feedback_date;
 	}
 
-	public Long getCourseTutorId() {
-		return courseTutorId;
+	public Student getStudent() {
+		return student;
 	}
 
-	public void setCourseTutorId(Long courseTutorId) {
-		this.courseTutorId = courseTutorId;
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public CourseTutor getCoursetutor() {
+		return courseTutor;
 	}
 
-	@Override
-	public String toString() {
-		return "Feedback [feedbackId=" + feedbackId + ", userId=" + userId + ", comments=" + comments + ", rating="
-				+ rating + ", feedbackDate=" + feedbackDate + ", courseTutorId=" + courseTutorId + "]";
+	public void setCoursetutor(CourseTutor coursetutor) {
+		this.courseTutor = coursetutor;
 	}
-    	
+    
+	
 }

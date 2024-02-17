@@ -1,83 +1,107 @@
 package com.example.demo.Entities;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "your_table_name") 
+@Table(name = "course") 
 public class Course {
 
     @Id
-    @Column(name = "course_id") 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseId;
+    private int course_id;
 
-    @Column(name = "course_title")
-    private String courseTitle;
+    @Column()
+    private String course_title;
 
-    @Column(name = "course_description") 
-    private String courseDescription;
+    @Column() 
+    private String course_description;
 
-    @Column(name = "course_active") 
-    private Boolean courseActive;
+    @Column()
+    private int course_active;
 
-    @Column(name = "category_id") 
-    private Long categoryId;
+    @ManyToOne()
+	@JoinColumn(name="category_id")
+    private Category category;
+    
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name="course_tutor",
+    			joinColumns = @JoinColumn(name="course_id") ,
+    			inverseJoinColumns = @JoinColumn(name="tut_id")
+    )
+    private Set<Tutor> tutors ;
 
-  
-    public Course() {
-        
-    }
+	public Course() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Course(String courseTitle, String courseDescription, Boolean courseActive, Long categoryId) {
-        this.courseTitle = courseTitle;
-        this.courseDescription = courseDescription;
-        this.courseActive = courseActive;
-        this.categoryId = categoryId;
-    }
+	public Course(String course_title, String course_description, int course_active, Category category,
+			Set<Tutor> tutors) {
+		super();
+		this.course_title = course_title;
+		this.course_description = course_description;
+		this.course_active = course_active;
+		this.category = category;
+		this.tutors = tutors;
+	}
 
-    // Getters and setters
-    public Long getCourseId() {
-        return courseId;
-    }
+	public Course(String course_title) {
+		super();
+		this.course_title = course_title;
+	}
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
+	public Course(int course_id) {
+		super();
+		this.course_id = course_id;
+	}
 
-    public String getCourseTitle() {
-        return courseTitle;
-    }
+	public int getCourse_id() {
+		return course_id;
+	}
 
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
-    }
+	public void setCourse_id(int course_id) {
+		this.course_id = course_id;
+	}
 
-    public String getCourseDescription() {
-        return courseDescription;
-    }
+	public String getCourse_title() {
+		return course_title;
+	}
 
-    public void setCourseDescription(String courseDescription) {
-        this.courseDescription = courseDescription;
-    }
+	public void setCourse_title(String course_title) {
+		this.course_title = course_title;
+	}
 
-    public Boolean getCourseActive() {
-        return courseActive;
-    }
+	public String getCourse_description() {
+		return course_description;
+	}
 
-    public void setCourseActive(Boolean courseActive) {
-        this.courseActive = courseActive;
-    }
+	public void setCourse_description(String course_description) {
+		this.course_description = course_description;
+	}
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
+	public int getCourse_active() {
+		return course_active;
+	}
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
+	public void setCourse_active(int course_active) {
+		this.course_active = course_active;
+	}
 
-    @Override
-    public String toString() {
-        return "Course [courseId=" + courseId + ", courseTitle=" + courseTitle + ", courseDescription=" + courseDescription + ", courseActive=" + courseActive + ", categoryId=" + categoryId + "]";
-    }
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Set<Tutor> getTutors() {
+		return tutors;
+	}
+
+	public void setTutors(Set<Tutor> tutors) {
+		this.tutors = tutors;
+	}
 }

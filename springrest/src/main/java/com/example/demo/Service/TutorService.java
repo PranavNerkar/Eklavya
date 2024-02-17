@@ -12,9 +12,8 @@ public class TutorService {
 	@Autowired
 	TutorRepo tr;
 	
-	public int save(Tutor t)
+	public Tutor save(Tutor t)
 	{
-		Tutor tu = tr.save(t) ;
-		return tu.getTut_id();
+		return tr.save(t) ;
 	}
 }

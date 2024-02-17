@@ -18,17 +18,29 @@ public class LogIn {
 	int login_id;
 	
 	@Column
+	String user_name;
+	
+	@Column
 	String user_id ;
 	
 	@Column
 	String password;
-	
-	@Column
-	String user_name;
 
+	@Column
+	int flag;
+	
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	Role role ;
+	
+	public LogIn(String user_name ,String user_id, String password,int flag, Role role) {
+		super();
+		this.user_name = user_name;
+		this.user_id = user_id;
+		this.password = password;
+		this.flag = flag;
+		this.role = role;
+	}
 	
 	public LogIn(String user_name ,String user_id, String password, Role role) {
 		super();
@@ -91,6 +103,14 @@ public class LogIn {
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override
