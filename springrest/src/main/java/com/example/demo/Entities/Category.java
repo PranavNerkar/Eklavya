@@ -7,38 +7,38 @@ import jakarta.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int category_id;
 
-    @Column(nullable = false) // Ensure that the name cannot be null in the database
-    private String name;
+    @Column()
+    private String category_name;
 
     public Category() {
         // Default constructor
     }
 
-    public Category(String name) {
-        this.name = name;
+    public Category(String category_name) {
+        this.category_name = category_name;
     }
 
     // Getters and setters
     public int getId() {
-        return id;
+        return category_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.category_id = id;
     }
 
     public String getName() {
-        return name;
+        return category_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String category_name) {
+        this.category_name = category_name;
     }
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", name=" + name + "]";
+        return "Category [id=" + category_id + ", name=" + category_name + "]";
     }
 }

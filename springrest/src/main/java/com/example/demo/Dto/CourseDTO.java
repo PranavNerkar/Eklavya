@@ -2,30 +2,28 @@ package com.example.demo.Dto;
 
 public class CourseDTO {
 
-    private Long courseId;
+    private int courseId;
     private String courseTitle;
     private String courseDescription;
     private Boolean courseActive;
-    private Long categoryId;
+    private int categoryId;
     
     public CourseDTO() {
         // Default constructor
     }
 
-    public CourseDTO(Long courseId, String courseTitle, String courseDescription, Boolean courseActive, Long categoryId) {
-        this.courseId = courseId;
+    public CourseDTO(String courseTitle, String courseDescription, int categoryId) {
         this.courseTitle = courseTitle;
         this.courseDescription = courseDescription;
-        this.courseActive = courseActive;
         this.categoryId = categoryId;
     }
 
     // Getters and setters
-    public Long getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
@@ -53,11 +51,11 @@ public class CourseDTO {
         this.courseActive = courseActive;
     }
 
-    public Long getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

@@ -20,7 +20,7 @@ public class StudentController {
 	
 	@PostMapping("/saveStudent")
 	public int savePatient(@RequestBody Registration r) {
-		Student s = new Student(r.getFirst_name(),r.getLast_name(),r.getEmail(),r.getContact_no(),r.getAge(),r.getGender(),r.getPassward(),new SecurityQuestion(r.getSque_id()),r.getAnswer(),new LogIn(r.getLogin_id()));
+		Student s = new Student(r.getFirst_name(),r.getLast_name(),r.getEmail(),r.getContact_no(),r.getAge(),r.getGender(),new SecurityQuestion(r.getSque_id()),r.getAnswer(),new LogIn(r.getLogin_id()));
 		int ret = ss.save(s) ;
 		return ret;
 	}

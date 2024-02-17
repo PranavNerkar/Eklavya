@@ -24,7 +24,6 @@ public class LoginService {
 			l = null ;
 		}
 		return l ;
-		
 	}
 	
 	public int check(String s)

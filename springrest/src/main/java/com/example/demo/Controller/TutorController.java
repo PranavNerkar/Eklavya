@@ -15,13 +15,14 @@ import com.example.demo.Service.TutorService;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class TutorController {
+	
 	@Autowired
 	TutorService ts;
 	
 	@PostMapping("/saveTutor")	
-	public int register(@RequestBody Registration tr) {
-		Tutor t = new Tutor(tr.getFirst_name(),tr.getLast_name(),tr.getEmail(),tr.getContact_no(),tr.getAge(),tr.getGender(),tr.getPassward(),new SecurityQuestion(tr.getSque_id()),tr.getAnswer(),new LogIn(tr.getLogin_id()));
-		int ret = ts.save(t) ;
-		return ret;
+	public Tutor register(@RequestBody Registration tr) {
+		Tutor t = new Tutor(tr.getFirst_name(),tr.getLast_name(),tr.getEmail(),tr.getContact_no(),tr.getAge(),tr.getGender(),new SecurityQuestion(tr.getSque_id()),tr.getAnswer(),new LogIn(tr.getLogin_id()));
+		t = ts.save(t) ;
+		return t;
 	}
 }
