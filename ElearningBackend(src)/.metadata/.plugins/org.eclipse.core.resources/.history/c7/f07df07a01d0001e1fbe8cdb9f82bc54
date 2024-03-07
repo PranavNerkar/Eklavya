@@ -1,0 +1,106 @@
+package com.backend.elearning.controllers;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.backend.elearning.models.User;
+import com.backend.elearning.models.UserData;
+import com.backend.elearning.services.RegisterService;
+
+@RestController	
+@RequestMapping("/api/elearning")
+public class AuthController {
+    @Autowired
+    private RegisterService registerService;
+
+    @PostMapping("/register")
+	public String userRegistration(@RequestBody User userToRegister) {
+		System.out.println("request hit" + userToRegister.toString());
+		return registerService.register(userToRegister);
+	}
+    
+    @PostMapping("/login")
+    public String userLogin(@RequestBody User obj) {
+		System.out.println("inside login");
+		String username = obj.getUserName();
+		String uname = registerService.getUserName(username);
+		System.out.println(username + " " + uname);
+		
+		if (uname == null) {
+			return "";
+		} else if(uname.equals(username)) {
+			String pass = obj.getPass();
+			String pwd = registerService.getPassword(uname);
+			if (pwd == null) {
+				return "";
+			}
+			if (pwd.equals(pass)) {
+				// get role id
+				Integer roleid = registerService.getUserRoleId(uname);
+				return uname;
+			} else {
+				return "";
+			}
+		}else {
+			return "";
+		}
+	}
+
+    @PostMapping("/rolename")
+	public String getUserRoleName(@RequestBody User user) {
+		System.out.println("rolename=" + user.getUserName());
+		return registerService.getUserRoleName(user.getUserName());
+	}
+
+    @PostMapping("/user/getuid/{userInfo}")
+	public String getUserIdByUserName(@PathVariable String userInfo) {
+		String result = registerService.getUserIDByUserName(userInfo);
+		return result;
+	}
+
+	@PostMapping("/getuid")
+	public String getUserIdByUserName(@RequestBody User user) {
+		System.out.println("username=" + user.getUserName());
+		String result = registerService.getUserIDByUserName(user.getUserName());
+		System.out.println(result);
+		return result;
+	}
+	
+	@GetMapping("/admin/users")
+	public List<UserData> getAllUsers() {
+
+		List<UserData> userList = new ArrayList<UserData>();
+
+		List<User> uList = registerService.getAllUsersList();
+
+		for (User us : uList) {
+
+			UserData u = new UserData();
+
+			u.setUserId(us.getUserId());
+			u.setUserName(us.getUserName());
+			u.setFirstName(us.getFirstName());
+			u.setLastName(us.getLastName());
+			u.setPhoneNo(us.getPhoneNo());
+			u.setEmail(us.getEmail());
+
+			userList.add(u);
+		}
+
+		return userList;
+	}
+	
+	@DeleteMapping("admin/deleteuser/{id}")
+	public String deleteUser(@PathVariable Long id) {
+		registerService.deleteUserByID(id);
+		return "User with id " + id + " has been deleted successfully.";
+	}
+}

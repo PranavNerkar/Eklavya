@@ -1,0 +1,54 @@
+package com.backend.elearning.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.backend.elearning.models.EnrolledCourseData;
+import com.backend.elearning.models.EnrolledCourses;
+import com.backend.elearning.services.EnrolledCoursesService;
+
+public class StudentController {
+	EnrolledCoursesService enrolledCoursesService;
+	
+	@PostMapping("/student/enrolled/courses/{userId}")
+	public List<EnrolledCourseData> getEnrolledCoursesList(@PathVariable Long userId) {
+
+		List<EnrolledCourseData> cList = new ArrayList<EnrolledCourseData>();
+
+		List<EnrolledCourses> cl = enrolledCoursesService.getEnrollmentByUserID(userId);
+
+		for (EnrolledCourses course : cl) {
+
+			EnrolledCourseData cd = new EnrolledCourseData();
+
+			cd.setEnrollId(course.getEnrollId());
+			cd.setCourseTitle(course.getCourseTitle());
+			cd.setCourseType(course.getCourseType());
+			cd.setuId(course.getuId());
+			cd.setcId(course.getcId()); // course id
+
+			cList.add(cd);
+
+		}
+
+		return cList;
+
+	}
+
+	// save course enrollment and email
+	@PostMapping("/student/enrollment")
+	public String saveCourseEnrollment(@RequestBody EnrolledCourses course) {
+
+		// enroll list of courses
+		enrolledCoursesService.saveCourseEnroll(course);
+
+		// send email
+
+		return "Course enrolled successfully";
+
+	}
+}

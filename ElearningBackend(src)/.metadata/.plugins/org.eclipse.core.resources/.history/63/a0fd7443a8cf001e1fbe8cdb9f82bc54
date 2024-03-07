@@ -1,0 +1,58 @@
+package com.backend.elearning.controllers;
+
+package com.backend.elearning.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.backend.elearning.fileupload.FileResponce;
+import com.backend.elearning.models.Course;
+import com.backend.elearning.models.SubTopic;
+import com.backend.elearning.models.Topic;
+import com.backend.elearning.models.User;
+import com.backend.elearning.services.FileService;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+
+@RestController
+public class FileController {
+
+    @Autowired
+    private FileService fileService;
+
+    @Value("${project.image}")
+    private String imagePath; // getting file path from properties where image will store
+
+    @PostMapping("/api/elearning/file/uploadimg")
+    public ResponseEntity<FileResponce> uploadFile(@RequestParam("image") MultipartFile image,
+                                                    @RequestParam("courseId") Course courseId,
+                                                    @RequestParam("userId") User userId,
+                                                    @RequestParam("chapterId") Topic chapterId,
+                                                    @RequestParam("subtId") SubTopic subtId) {
+        try {
+            String fileName = fileService.uploadImage(imagePath, image, courseId, userId, chapterId, subtId);
+            return new ResponseEntity<>(new FileResponce(fileName, "Image uploaded successfully"), HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(new FileResponce(null, "Failed to upload image"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // Download image
+    @PostMapping(value = "/api/elearning/file/download/{imageName}", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void downloadImage(@RequestParam("imageName") String imageName, HttpServletResponse response) throws IOException {
+        InputStream resource = fileService.getResources(imagePath, imageName);
+        response.setContentType(MediaType.MULTIPART_FORM_DATA_VALUE);
+        StreamUtils.copy(resource, response.getOutputStream());
+    }
+}
+
