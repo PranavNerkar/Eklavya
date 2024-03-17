@@ -15,5 +15,4 @@ public class ElearningBackendApplication {
 		SpringApplication.run(ElearningBackendApplication.class, args);
 		System.out.println("App is running fine......");
 	}
-
 }

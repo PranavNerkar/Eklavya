@@ -24,8 +24,6 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -194,6 +192,22 @@ public class User {
 		return "User [userId=" + userId + ", userName=" + userName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", pass=" + pass + ", phoneNo=" + phoneNo + ", address=" + address
 				+ ", role=" + role + "]";
+	}
+
+	public User(Long userId, String userName, String firstName, String lastName, String email, String pass,
+			String phoneNo, String address, Role role, List<Course> courses, List<Order> orders) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.pass = pass;
+		this.phoneNo = phoneNo;
+		this.address = address;
+		this.role = role;
+		Courses = courses;
+		this.orders = orders;
 	}
 
 	

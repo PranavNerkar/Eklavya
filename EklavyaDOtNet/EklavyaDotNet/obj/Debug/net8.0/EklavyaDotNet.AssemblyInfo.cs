@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EklavyaDotNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+660d3d04d55a1d38df5787699ab744f15d4ed872")]
 [assembly: System.Reflection.AssemblyProductAttribute("EklavyaDotNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EklavyaDotNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
